@@ -13,10 +13,15 @@ function ShoppingList() {
    // .then((items) => console.log(items))
     .then((items) => setItems(items));
   })
+
+  function handleUpdateItem(updatedItem) {
+    console.log("In ShoppingCart:", updatedItem);
+  }
+
   function handleAddItem(newItem) {
     console.log("In ShoppingList:", newItem);
   }
-  
+
   function handleCategoryChange(category) {
     setSelectedCategory(category);
   }
@@ -36,7 +41,7 @@ function ShoppingList() {
       />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
-          <Item key={item.id} item={item} />
+          <Item key={item.id} item={item} onUpdateItem={handleUpdateItem}/>
         ))}
       </ul>
     </div>
