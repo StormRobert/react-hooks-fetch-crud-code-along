@@ -16,6 +16,19 @@ function Item({ item, onUpdateItem }) {
       .then((r) => r.json())
       .then((updatedItem) => onUpdateItem(updatedItem));
   }
+
+  // Deconstruct the onDeleteItem prop
+function Item({ item, onUpdateItem, onDeleteItem }) {
+  function handleDeleteClick() {
+    // Call onDeleteItem, passing the deleted item
+    fetch(`http://localhost:4000/items/${item.id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(() => onDeleteItem(item));
+  }
+}
+
   return (
     <li className={item.isInCart ? "in-cart" : ""}>
       <span>{item.name}</span>
