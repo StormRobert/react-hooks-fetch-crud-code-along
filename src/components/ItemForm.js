@@ -4,8 +4,28 @@ function ItemForm() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Produce");
 
+  // function handling submit
+  function handleSubmit(event){
+    event.preventDefault();
+    console.log(`You submitted ${name} and ${category}`);
+    const itemData = {
+      name: name,
+      category: category,
+      isInCart: false,
+    };
+    fetch("http://localhost:4000/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(itemData),
+    })
+      .then((r) => r.json())
+      .then((newItem) => console.log(newItem));
+  }
+
   return (
-    <form className="NewItem">
+    <form className="NewItem" onSubmit = {handleSubmit}>
       <label>
         Name:
         <input
